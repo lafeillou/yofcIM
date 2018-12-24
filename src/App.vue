@@ -106,9 +106,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import peopleData from "./data/people";
-import carData from "./data/car";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import peopleData from './data/people';
+import carData from './data/car';
 
 // import BaiduMap from "vue-baidu-map/components/map/Map.vue";
 
@@ -119,6 +119,7 @@ export default class App extends Vue {
   isCollapsed: Boolean = false;
   center: any = { lng: 0, lat: 0 };
   zoom: Number = 3;
+
   // 全部警员
   isShowAllPolice: Boolean = false;
   isShowAllCar: Boolean = false;
@@ -126,10 +127,10 @@ export default class App extends Vue {
   cars: any = carData;
   // computed
   get rotateIcon(): string[] {
-    return ["menu-icon", this.isCollapsed ? "rotate-icon" : ""];
+    return ['menu-icon', this.isCollapsed ? 'rotate-icon' : ''];
   }
   get menuitemClasses(): string[] {
-    return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
+    return ['menu-item', this.isCollapsed ? 'collapsed-menu' : ''];
   }
 
   // components: any = {
