@@ -102,19 +102,26 @@
             </Card>
           </div>
         </Content>
+         <div class="incomingCall">
+            <incoming-call></incoming-call>
+        </div>
       </Layout>
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Prop, Vue } from 'vue-property-decorator'
 import peopleData from './data/people'
 import carData from './data/car'
+import Component from "vue-class-component";
+import IncomingCall from "@/components/IncomingCall.vue";
 
 // import BaiduMap from "vue-baidu-map/components/map/Map.vue";
 
-@Component
+@Component({
+  components: { IncomingCall }
+})
 export default class App extends Vue {
   // @Prop() private msg!: string;
   @Prop() private size!: any
@@ -232,5 +239,13 @@ body {
   transition: font-size 0.2s ease 0.2s, transform 0.2s ease 0.2s;
   vertical-align: middle;
   font-size: 22px;
+}
+.incomingCall {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: white;
 }
 </style>
