@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "strict": true,
+    "strict": false,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
@@ -24,7 +24,14 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    // 以严格模式解析
+    "typeRoots": [
+      // add path to @types
+      "node_modules/@types",
+      "node_modules/vue/types",
+      "node_modules/iview/types"
+    ],
   },
   "include": [
     "src/**/*.ts",
