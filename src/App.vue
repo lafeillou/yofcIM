@@ -13,7 +13,9 @@
           </MenuItem>
           <MenuItem name="1-3">
             <Icon type="md-grid"></Icon>
-            <span>应用管理</span>
+            <span>应用管理
+
+            </span>
           </MenuItem>
         </Menu>
       </Sider>
@@ -106,30 +108,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import peopleData from "./data/people";
-import carData from "./data/car";
+import { Component, Prop, Vue } from 'vue-property-decorator'
+import peopleData from './data/people'
+import carData from './data/car'
 
 // import BaiduMap from "vue-baidu-map/components/map/Map.vue";
 
 @Component
 export default class App extends Vue {
   // @Prop() private msg!: string;
-  @Prop() private size!: any;
-  isCollapsed: Boolean = false;
-  center: any = { lng: 0, lat: 0 };
-  zoom: Number = 3;
+  @Prop() private size!: any
+
+  isCollapsed: Boolean = false
+  center: any = { lng: 0, lat: 0 }
+  zoom: Number = 3
+
   // 全部警员
-  isShowAllPolice: Boolean = false;
-  isShowAllCar: Boolean = false;
-  peoples: any[] = peopleData;
-  cars: any = carData;
+  isShowAllPolice: Boolean = false
+  isShowAllCar: Boolean = false
+  peoples: any[] = peopleData
+  cars: any = carData
   // computed
   get rotateIcon(): string[] {
-    return ["menu-icon", this.isCollapsed ? "rotate-icon" : ""];
+    return ['menu-icon', this.isCollapsed ? 'rotate-icon' : '']
   }
   get menuitemClasses(): string[] {
-    return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
+    return ['menu-item', this.isCollapsed ? 'collapsed-menu' : '']
   }
 
   // components: any = {
@@ -137,7 +141,7 @@ export default class App extends Vue {
   // };
   // methods
   collapsedSider(): void {
-    this.isCollapsed = !this.isCollapsed;
+    this.isCollapsed = !this.isCollapsed
   }
 
   // handler({ BMap, map }): void
@@ -145,21 +149,21 @@ export default class App extends Vue {
     // console.log(BMap, map);
     // 114.217379,30.776258
     // 114.219919,30.773363
-    this.center.lng = 114.219919;
-    this.center.lat = 30.773363;
-    this.zoom = 19;
+    this.center.lng = 114.219919
+    this.center.lat = 30.773363
+    this.zoom = 19
   }
 
   // 显示所有警员
   showAllPolice(): void {
     // alert("123");
-    this.isShowAllPolice = !this.isShowAllPolice;
+    this.isShowAllPolice = !this.isShowAllPolice
   }
 
   // 显示所有车辆
   showAllCar(): void {
     // alert(123);
-    this.isShowAllCar = !this.isShowAllCar;
+    this.isShowAllCar = !this.isShowAllCar
   }
 }
 </script>
