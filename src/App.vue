@@ -62,6 +62,7 @@
               :dragging="true"
               animation="BMAP_ANIMATION_BOUNCE"
               :icon="{url: p.iconUrl, size: {width: 70, height: 84}}"
+              @click="clickHandler(p)"
             ></bm-marker>
 
             <bm-marker
@@ -73,6 +74,11 @@
               animation="BMAP_ANIMATION_BOUNCE"
               :icon="{url: car.iconUrl, size: {width: 62, height: 122}}"
             ></bm-marker>
+             <!-- @close="infoWindowClose" @open="infoWindowOpen" -->
+            <bm-info-window :position="{lng: position.lng, lat: position.lat}" title="" :show="infoWindow.show" @close="infoWindowClose"  @open="infoWindowOpen"> 
+                <p style="margin-bottom: 20px;" @click="audioCall()">音频通话</p>
+                <p @click="videoCall()">视频通话</p>
+            </bm-info-window>
           </baidu-map>
 
           <div style="position:fixed;top:120px;left:210px;">
@@ -114,8 +120,8 @@
 import { Prop, Vue } from 'vue-property-decorator'
 import peopleData from './data/people'
 import carData from './data/car'
-import Component from "vue-class-component";
-import IncomingCall from "@/components/IncomingCall.vue";
+import Component from 'vue-class-component'
+import IncomingCall from '@/components/IncomingCall.vue'
 
 // import BaiduMap from "vue-baidu-map/components/map/Map.vue";
 
@@ -126,6 +132,15 @@ export default class App extends Vue {
   // @Prop() private msg!: string;
   @Prop() private size!: any
 
+  infoWindow: any = {
+    show: false,
+    contents:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  }
+  position: any = {
+    lng: 0,
+    lat: 0
+  }
   isCollapsed: Boolean = false
   center: any = { lng: 0, lat: 0 }
   zoom: Number = 3
@@ -172,6 +187,30 @@ export default class App extends Vue {
     // alert(123);
     this.isShowAllCar = !this.isShowAllCar
   }
+
+  //弹框显示
+  clickHandler(p) {
+    this.position.lng = p.position.lng
+    this.position.lat = p.position.lat + 0.0001
+    // alert(this.position.lat)
+    this.infoWindow.show = true
+  }
+
+  //弹框关闭
+  infoWindowClose() {
+    this.infoWindow.show = false
+  }
+
+  //弹框打开
+  infoWindowOpen() {
+    this.infoWindow.show = true
+  }
+
+  //音频通话
+  audioCall() {}
+
+  //视频通话
+  videoCall() {}
 }
 </script>
 <style>
