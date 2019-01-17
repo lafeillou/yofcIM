@@ -62,6 +62,7 @@
               :dragging="true"
               animation="BMAP_ANIMATION_BOUNCE"
               :icon="{url: p.iconUrl, size: {width: 70, height: 84}}"
+              @click="clickHandler(p)"
             ></bm-marker>
 
             <bm-marker
@@ -73,6 +74,29 @@
               animation="BMAP_ANIMATION_BOUNCE"
               :icon="{url: car.iconUrl, size: {width: 62, height: 122}}"
             ></bm-marker>
+             <!-- @close="infoWindowClose" @open="infoWindowOpen" -->
+            <bm-info-window :position="{lng: position.lng, lat: position.lat}" title="" :show="infoWindow.show" @close="infoWindowClose"  @open="infoWindowOpen"> 
+                <!-- <p style="margin-bottom: 20px;" @click="audioCall()">音频通话</p>
+                <p @click="videoCall()">视频通话</p> -->
+                <div style="border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:5px;"><a href="javascript:void(0);">张泽浩</a> <span style="border:1px solid #ddd;margin-left:10px;">视频通话</span> </div>
+                <a href="javascript:void(0);" style="margin:0 20px;">查看历史轨迹</a>
+                <a href="javascript:void(0);">故障上报</a>
+                <p>设备编号：123456</p>
+                <p>所属单位：宜昌市公安局交警大队</p>
+                <p>设备类型：单兵</p>
+                <p>设备厂商：海康卫视</p>
+                <p>电话号码：13739199950</p>
+                <p>最后时间：2018-10-22</p>
+                <p>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：在线</p>
+            </bm-info-window>
+            <!-- <div id="callContainer" v-show="modal1">
+               <div style="height:50px;line-height:50px;background-color:white;"><span style="margin-left:20px;">张泽浩</span><a href="javascript:void(0);" style="float:right;margin-right:20px;" @click="closeCallContainer()">X</a></div>
+               <ul>
+                 <li>音频通话</li>
+                 <li>视频通话</li>
+                 <li @click="closeCallContainer()">取消</li>
+               </ul>
+            </div> -->
           </baidu-map>
 
           <div style="position:fixed;top:120px;left:210px;">
@@ -102,23 +126,39 @@
             </Card>
           </div>
         </Content>
+         <div class="incomingCall">
+            <incoming-call></incoming-call>
+        </div>
       </Layout>
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Prop, Vue } from 'vue-property-decorator'
 import peopleData from './data/people'
 import carData from './data/car'
+import Component from 'vue-class-component'
+import IncomingCall from '@/components/IncomingCall.vue'
 
 // import BaiduMap from "vue-baidu-map/components/map/Map.vue";
 
-@Component
+@Component({
+  components: { IncomingCall }
+})
 export default class App extends Vue {
   // @Prop() private msg!: string;
   @Prop() private size!: any
 
+  infoWindow: any = {
+    show: false,
+    contents:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  }
+  position: any = {
+    lng: 0,
+    lat: 0
+  }
   isCollapsed: Boolean = false
   center: any = { lng: 0, lat: 0 }
   zoom: Number = 3
@@ -128,6 +168,7 @@ export default class App extends Vue {
   isShowAllCar: Boolean = false
   peoples: any[] = peopleData
   cars: any = carData
+  // modal1: Boolean = false
   // computed
   get rotateIcon(): string[] {
     return ['menu-icon', this.isCollapsed ? 'rotate-icon' : '']
@@ -165,6 +206,40 @@ export default class App extends Vue {
     // alert(123);
     this.isShowAllCar = !this.isShowAllCar
   }
+
+  //弹框显示
+  clickHandler(p) {
+    this.position.lng = p.position.lng
+    this.position.lat = p.position.lat + 0.0001
+    // alert(this.position.lat)
+    this.infoWindow.show = true
+  }
+
+  //弹框关闭
+  infoWindowClose() {
+    this.infoWindow.show = false
+  }
+
+  //弹框打开
+  infoWindowOpen() {
+    this.infoWindow.show = true
+  }
+
+  //音频通话
+  audioCall() {}
+
+  //视频通话
+  videoCall() {}
+
+  //通话呼叫
+  // clickCall() {
+  //   this.modal1 = true
+  // }
+
+  // //关闭呼叫对话框
+  // closeCallContainer() {
+  //   this.modal1 = false
+  // }
 }
 </script>
 <style>
@@ -233,4 +308,37 @@ body {
   vertical-align: middle;
   font-size: 22px;
 }
+.incomingCall {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+/* #callContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  background-color: black;
+  z-index: 1200;
+  margin-left: -250px;
+  margin-top: -250px;
+}
+#callContainer ul {
+  margin-top: 120px;
+}
+#callContainer li {
+  background-color: white;
+  list-style: none;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+} */
 </style>
