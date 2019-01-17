@@ -78,7 +78,7 @@
             <bm-info-window :position="{lng: position.lng, lat: position.lat}" title="" :show="infoWindow.show" @close="infoWindowClose"  @open="infoWindowOpen"> 
                 <!-- <p style="margin-bottom: 20px;" @click="audioCall()">音频通话</p>
                 <p @click="videoCall()">视频通话</p> -->
-                <div style="border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:5px;"><a href="javascript:void(0);">张泽浩</a> <span style="border:1px solid #ddd;margin-left:10px;" @click="clickCall()">视频通话</span> </div>
+                <div style="border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:5px;"><a href="javascript:void(0);">张泽浩</a> <span style="border:1px solid #ddd;margin-left:10px;">视频通话</span> </div>
                 <a href="javascript:void(0);" style="margin:0 20px;">查看历史轨迹</a>
                 <a href="javascript:void(0);">故障上报</a>
                 <p>设备编号：123456</p>
