@@ -76,9 +76,27 @@
             ></bm-marker>
              <!-- @close="infoWindowClose" @open="infoWindowOpen" -->
             <bm-info-window :position="{lng: position.lng, lat: position.lat}" title="" :show="infoWindow.show" @close="infoWindowClose"  @open="infoWindowOpen"> 
-                <p style="margin-bottom: 20px;" @click="audioCall()">音频通话</p>
-                <p @click="videoCall()">视频通话</p>
+                <!-- <p style="margin-bottom: 20px;" @click="audioCall()">音频通话</p>
+                <p @click="videoCall()">视频通话</p> -->
+                <div style="border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:5px;"><a href="javascript:void(0);">张泽浩</a> <span style="border:1px solid #ddd;margin-left:10px;" @click="clickCall()">视频通话</span> </div>
+                <a href="javascript:void(0);" style="margin:0 20px;">查看历史轨迹</a>
+                <a href="javascript:void(0);">故障上报</a>
+                <p>设备编号：123456</p>
+                <p>所属单位：宜昌市公安局交警大队</p>
+                <p>设备类型：单兵</p>
+                <p>设备厂商：海康卫视</p>
+                <p>电话号码：13739199950</p>
+                <p>最后时间：2018-10-22</p>
+                <p>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：在线</p>
             </bm-info-window>
+            <!-- <div id="callContainer" v-show="modal1">
+               <div style="height:50px;line-height:50px;background-color:white;"><span style="margin-left:20px;">张泽浩</span><a href="javascript:void(0);" style="float:right;margin-right:20px;" @click="closeCallContainer()">X</a></div>
+               <ul>
+                 <li>音频通话</li>
+                 <li>视频通话</li>
+                 <li @click="closeCallContainer()">取消</li>
+               </ul>
+            </div> -->
           </baidu-map>
 
           <div style="position:fixed;top:120px;left:210px;">
@@ -150,6 +168,7 @@ export default class App extends Vue {
   isShowAllCar: Boolean = false
   peoples: any[] = peopleData
   cars: any = carData
+  // modal1: Boolean = false
   // computed
   get rotateIcon(): string[] {
     return ['menu-icon', this.isCollapsed ? 'rotate-icon' : '']
@@ -211,6 +230,16 @@ export default class App extends Vue {
 
   //视频通话
   videoCall() {}
+
+  //通话呼叫
+  // clickCall() {
+  //   this.modal1 = true
+  // }
+
+  // //关闭呼叫对话框
+  // closeCallContainer() {
+  //   this.modal1 = false
+  // }
 }
 </script>
 <style>
@@ -287,4 +316,29 @@ body {
   border: 1px solid #ddd;
   background-color: white;
 }
+/* #callContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  background-color: black;
+  z-index: 1200;
+  margin-left: -250px;
+  margin-top: -250px;
+}
+#callContainer ul {
+  margin-top: 120px;
+}
+#callContainer li {
+  background-color: white;
+  list-style: none;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+} */
 </style>
